@@ -11,12 +11,14 @@ RSpec.describe Openai::Client do
     let(:logger)          { instance_double(Logger) }
     let(:access_token)    { Faker::Internet.password }
     let(:organization_id) { Faker::Number.digit }
+    let(:openai_url)      { Faker::Internet.url }
 
     before do
       described_class.configure do |c|
         c.access_token    = access_token
         c.organization_id = organization_id
         c.logger          = logger
+        c.openai_url      = openai_url
       end
     end
 
@@ -30,6 +32,10 @@ RSpec.describe Openai::Client do
 
     it 'returns the provided organization_id' do
       expect(configuration.organization_id).to eq(organization_id)
+    end
+
+    it 'returns the provided openai_url' do
+      expect(configuration.openai_url).to eq(openai_url)
     end
   end
 end
