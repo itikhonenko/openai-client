@@ -6,11 +6,22 @@ PATH
 GEM
   remote: https://rubygems.org/
   specs:
+    addressable (2.8.1)
+      public_suffix (>= 2.0.2, < 6.0)
     ast (2.4.2)
+    concurrent-ruby (1.2.0)
+    crack (0.4.5)
+      rexml
     diff-lcs (1.4.4)
+    faker (2.23.0)
+      i18n (>= 1.8.11, < 2)
+    hashdiff (1.0.1)
+    i18n (1.12.0)
+      concurrent-ruby (~> 1.0)
     parallel (1.21.0)
     parser (3.1.1.0)
       ast (~> 2.4.1)
+    public_suffix (5.0.1)
     rainbow (3.1.1)
     rake (13.0.6)
     regexp_parser (1.8.2)
@@ -39,17 +50,34 @@ GEM
       unicode-display_width (>= 1.4.0, < 3.0)
     rubocop-ast (1.16.0)
       parser (>= 3.1.1.0)
+    rubocop-performance (1.15.2)
+      rubocop (>= 1.7.0, < 2.0)
+      rubocop-ast (>= 0.4.0)
+    rubocop-rspec (2.11.1)
+      rubocop (~> 1.19)
     ruby-progressbar (1.11.0)
     unicode-display_width (2.1.0)
+    webmock (3.18.1)
+      addressable (>= 2.8.0)
+      crack (>= 0.3.2)
+      hashdiff (>= 0.4.0, < 2.0.0)
+    webrick (1.7.0)
+    yard (0.9.28)
+      webrick (~> 1.7.0)
 
 PLATFORMS
   x86_64-darwin-22
 
 DEPENDENCIES
+  faker (~> 2.0)
   openai-client!
   rake (~> 13.0)
   rspec (~> 3.0)
   rubocop (~> 1.21)
+  rubocop-performance (~> 1.12)
+  rubocop-rspec (~> 2.6)
+  webmock (~> 3.12)
+  yard (~> 0.9)
 
 BUNDLED WITH
    2.4.3

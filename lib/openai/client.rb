@@ -1,10 +1,12 @@
 # frozen_string_literal: true
 
-require_relative 'client/version'
+require 'openai/client/version'
+require 'openai/client/configurable'
 
 module Openai
   module Client
     class Error < StandardError; end
-    # Your code goes here...
+
+    extend Configurable
   end
 end

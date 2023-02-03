@@ -1,13 +1,202 @@
+require:
+  - rubocop-performance
+  - rubocop-rspec
+
 AllCops:
   TargetRubyVersion: 2.6
+  NewCops: enable
+Layout/EmptyLinesAroundClassBody:
+  Enabled: false
+Layout/EmptyLinesAroundMethodBody:
+  Enabled: false
+Layout/EmptyLinesAroundModuleBody:
+  Enabled: false
 
-Style/StringLiterals:
-  Enabled: true
-  EnforcedStyle: single_quotes
+# Checks that the indentation of method names for calls that span lines is relative to what the call is made on.
+Layout/MultilineMethodCallIndentation:
+  EnforcedStyle: indented_relative_to_receiver
 
-Style/StringLiteralsInInterpolation:
-  Enabled: true
-  EnforcedStyle: single_quotes
+# Checks that there is exactly one space between a method and it's first argument when parentheses are not used.
+# Not enforced.
+Layout/SpaceBeforeFirstArg:
+  Enabled: false
 
+# Use spaces inside hash literal braces. Not enforced.
+Layout/SpaceInsideHashLiteralBraces:
+  Enabled: false
+
+# Maximum line length of 120 chars
 Layout/LineLength:
   Max: 120
+
+# Disabled since MFA is not supported for internal rubygems
+Gemspec/RequireMFA:
+  Enabled: false
+
+# -------------------------------------------------------- Lint --------------------------------------------------------
+
+# Don't use assignment in conditions. Not enforced, since this is occasionally useful.
+Lint/AssignmentInCondition:
+  Enabled: false
+
+Naming/MethodParameterName:
+  MinNameLength: 1
+
+Lint/ScriptPermission:
+  Exclude:
+  - "Rakefile"
+
+# ------------------------------------------------------- Naming -------------------------------------------------------
+
+# Ensure numbered variables use snake_case, i.e. variable_1.
+Naming/VariableNumber:
+  EnforcedStyle: snake_case
+Naming/MemoizedInstanceVariableName:
+  EnforcedStyleForLeadingUnderscores: optional
+
+# ------------------------------------------------------- Metrics ------------------------------------------------------
+
+# Counts the number of assignments, branches (including method calls), and conditions, keeps it below a maximum.
+# Not enforced.
+Metrics/AbcSize:
+  Enabled: false
+
+# Avoid blocks longer than 25 lines of code, except for RSpec's DSL
+Metrics/BlockLength:
+  Max: 25
+  Exclude:
+  - "**/spec_helper.rb"
+  IgnoredMethods:
+  - after
+  - before
+  - context
+  - describe
+  - feature
+  - it
+  - let
+  - scenario
+  - shared_examples
+  - shared_examples_for
+
+# Restrict the number of lines in a class (not counting comments) to a maximum
+Metrics/ClassLength:
+  Max: 150
+
+# Avoid deep nesting
+Metrics/CyclomaticComplexity:
+  Max: 10
+
+# Avoid methods longer than 30 lines of code
+Metrics/MethodLength:
+  Exclude:
+  - "spec/**/*"
+  Max: 30
+
+# Do not apply the module length check to spec files.
+Metrics/ModuleLength:
+  Exclude:
+  - "spec/**/*"
+
+# Avoid parameter lists longer than three or four parameters. Not enforced.
+Metrics/ParameterLists:
+  Enabled: false
+
+# Tries to score methods for complexity, with some special cases around case..when statements.
+# Not enforced (we use Metrics/CyclomaticComplexity instead).
+Metrics/PerceivedComplexity:
+  Enabled: false
+
+# ------------------------------------------------------- Style --------------------------------------------------------
+
+# Forces the use of the shortcut %() for single-line strings with interpolation and double quotes.
+# Not enforced.
+Style/BarePercentLiterals:
+  Enabled: false
+
+# Always use {} for single line blocks and do..end for multi-line blocks
+Style/BlockDelimiters:
+  EnforcedStyle: line_count_based
+
+# There are two styles for defining class/module hierarchies
+# class Alpha
+#   class Beta
+#   end
+# end
+#
+# class Alpha::Beta
+# end
+#
+# Allow both (not enforced).
+Style/ClassAndModuleChildren:
+  Enabled: false
+
+# Forces consistent use of is_a? vs kind_of?
+# Not enforced.
+Style/ClassCheck:
+  Enabled: false
+
+# Document classes and non-namespace modules. Not enforced.
+Style/Documentation:
+  Enabled: false
+
+# Disallows !!variable to convert variable to a boolean
+# Not enforced.
+Style/DoubleNegation:
+  Enabled: false
+
+# Checks that empty method definitions have 'end' on a separate line.
+Style/EmptyMethod:
+  EnforcedStyle: expanded
+
+# Disallows guard clauses.
+# Not enforced because it conflicts with removing Style/MultilineIfModifier.
+Style/GuardClause:
+  Enabled: false
+
+# Disallows trailing comments on any line with code in it.
+# Not enforced.
+Style/InlineComment:
+  Enabled: false
+
+# Favor unless over if for negative conditions (or control flow or). Not enforced.
+Style/NegatedIf:
+  Enabled: false
+
+# Checks that the next keyword is used rather than a condition to skip the body of a loop
+# Not enforced.
+Style/Next:
+  Enabled: false
+
+# Uses slashes for single-line regexes, and %r for multiline regexes or regexes with inner slashes.
+Style/RegexpLiteral:
+  EnforcedStyle: mixed
+
+# Always use 'raise' command, never 'fail'
+Style/SignalException:
+  EnforcedStyle: only_raise
+
+# Use symbols as procs whenever possible. Instead of
+# arr.map { |x| x.id }
+# use
+# arr.map(&:id)
+# Not enforced.
+Style/SymbolProc:
+  Enabled: false
+
+# Use %w or %W for arrays of words. Not enforced.
+Style/WordArray:
+  Enabled: false
+  EnforcedStyle: percent
+
+# Call super to initialize state of the parent class.
+Lint/MissingSuper:
+  Enabled: false
+
+# ------------------------------------------------------- RSpec --------------------------------------------------------
+RSpec/MultipleMemoizedHelpers:
+  Max: 15
+
+# Disable "Maximum example group nesting exceeded"
+#   Disabling this will allow us to have more verbose specs, and easier to understand and structure
+RSpec/NestedGroups:
+  Enabled: false
