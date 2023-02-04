@@ -1,7 +1,5 @@
 # frozen_string_literal: true
 
-require 'openai/client/configuration'
-
 module Openai
   module Client
     module Configurable
@@ -23,6 +21,7 @@ module Openai
       #    c.logger          = Rails.logger
       #    c.access_token    = 'access_token_goes_here'
       #    c.organization_id = 'organization_id_goes_here'
+      #    c.openai_url      = 'https://api.openai.com/v1'
       #  end
       def configure
         yield(configuration)
