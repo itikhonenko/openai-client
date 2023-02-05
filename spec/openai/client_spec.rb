@@ -38,4 +38,12 @@ RSpec.describe Openai::Client do
       expect(configuration.openai_url).to eq(openai_url)
     end
   end
+
+  describe '.models' do
+    subject(:models) { described_class.models }
+
+    it 'returns an instance of the Models class' do
+      expect(models).to be_instance_of(described_class::Models)
+    end
+  end
 end
