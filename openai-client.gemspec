@@ -5,7 +5,7 @@ require_relative 'lib/openai/client/version'
 Gem::Specification.new do |spec|
   spec.name = 'openai-client'
   spec.version = Openai::Client::VERSION
-  spec.authors = ['itikhonenko']
+  spec.authors = ['Ihor Tykhonenko']
   spec.email = ['tikhonenkoigor@gmail.com']
 
   spec.summary = 'A Ruby gem for the OpenAI GPT-3 API'
