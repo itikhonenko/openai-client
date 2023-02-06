@@ -8,13 +8,14 @@ Gem::Specification.new do |spec|
   spec.authors = ['Ihor Tykhonenko']
   spec.email = ['tikhonenkoigor@gmail.com']
 
-  spec.summary = 'A Ruby gem for the OpenAI GPT-3 API'
+  spec.summary  = 'A Ruby gem for the OpenAI GPT-3 API'
   spec.homepage = 'https://github.com/itikhonenko/openai-client'
   spec.required_ruby_version = '>= 2.6.0'
 
-  spec.metadata['homepage_uri'] = spec.homepage
+  spec.metadata['homepage_uri']    = spec.homepage
   spec.metadata['source_code_uri'] = spec.homepage
-  spec.metadata['changelog_uri'] = "#{spec.homepage}/blob/main/README.md"
+  spec.metadata['changelog_uri']   = "#{spec.homepage}/blob/main/README.md"
+  spec.license = 'MIT'
 
   # Specify which files should be added to the gem when it is released.
   # The `git ls-files -z` loads the files in the RubyGem that have been added into git.
