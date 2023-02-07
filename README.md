@@ -26,13 +26,43 @@ Openai::Client.configure do |c|
   c.access_token    = 'access_token'
   c.organization_id = 'organization_id' # optional
 end
+```
 
+## OpenAI Models API
+```ruby
 # Models
 Openai::Client.models.list
 
 # Find a Model
 Openai::Client.models.find(model_id)
 ```
+## OpenAI Completions API
+```ruby
+request_body = {
+  model: 'text-davinci-003',
+  prompt: 'Say this is a test',
+  max_tokens: 7,
+  temperature: 0,
+  top_p: 1,
+  n: 1,
+  stream: false,
+  logprobs: nil,
+  stop: "\n"
+}
+Openai::Client.completions.create(request_body)
+```
+[Completions request body documentation](https://platform.openai.com/docs/api-reference/completions/create)
+
+## OpenAI Edits API
+```ruby
+request_body = {
+  model: 'text-davinci-edit-001',
+  input: 'What day of the wek is it?',
+  instruction: 'Fix the spelling mistakes'
+}
+Openai::Client.edits.create(request_body)
+```
+[Edits request body documentation](https://platform.openai.com/docs/api-reference/edits/create)
 
 ## Contributing
 Bug reports and pull requests are welcome on GitHub at https://github.com/itikhonenko/openai-client.

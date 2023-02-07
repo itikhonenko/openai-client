@@ -3,6 +3,10 @@
 require 'support/shared_examples'
 
 RSpec.describe Openai::Client::Models do
+  before do
+    stub_request(:get, url).to_return(body: '{}', status: status)
+  end
+
   describe '#find' do
     subject { described_class.new.find(model_id) }
 
