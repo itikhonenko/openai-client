@@ -1,12 +1,6 @@
 # frozen_string_literal: true
 
 RSpec.shared_examples 'API wrapper' do
-  let(:body) { '{}' }
-
-  before do
-    stub_request(:get, url).to_return(body: body, status: status)
-  end
-
   context 'when the API call is successful' do
     let(:status) { 200 }
 
