@@ -39,7 +39,7 @@ RSpec.describe Openai::Client do
     end
   end
 
-  ['models', 'edits', 'completions'].each do |attr|
+  ['models', 'edits', 'completions', 'images'].each do |attr|
     describe ".#{attr}" do
       subject(:method) { described_class.public_send(attr) }
 

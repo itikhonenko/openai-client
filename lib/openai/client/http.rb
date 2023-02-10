@@ -8,6 +8,7 @@ module Openai
           conn.response :json
           conn.response :raise_error
           conn.request :json
+          conn.request :multipart
         end
         @logger = Openai::Client.configuration.logger
       end
@@ -38,6 +39,24 @@ module Openai
       # @return [Faraday::Response] instance of Faraday::Response class
       def post(path, body = {})
         connection.post(path, body)
+      rescue Faraday::Error => e
+        log_error(e) && raise
+      end
+
+      # @api public
+      # Public: Makes a multipart request using the Faraday HTTP Client.
+      #
+      # @param [String] path API path
+      # @param [Hash] body request body
+      #
+      # @raise [Faraday::Error] on failure API call
+      #
+      # @return [Faraday::Response] instance of Faraday::Response class
+      def multipart_post(path, body = {})
+        connection.post(path, body) do |request|
+          request.headers['Content-Type'] = 'multipart/form-data'
+          request.options.timeout = 300
+        end
       rescue Faraday::Error => e
         log_error(e) && raise
       end
