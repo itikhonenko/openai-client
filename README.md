@@ -11,8 +11,7 @@ This gem is a wrapper for calling the OpenAI and GPT-3 APIs.
   * [Create an Image](#create-an-image)
   * [Create an Image Edit](#create-an-image-edit)
   * [Create an Image Variation](#create-an-image-variation)
-
-
+* [OpenAI Embeddings API](#openai-embeddings-api)
 
 ## Installation
 
@@ -140,6 +139,18 @@ response = Openai::Client.images.variations(request_body)
 - `image` - must be a valid PNG file, less than 4MB, and square.
 
 [Request body documentation](https://platform.openai.com/docs/api-reference/images/create-variation)
+
+## OpenAI Embeddings API
+
+```ruby
+request_body = {
+  model: 'text-embedding-ada-002',
+  input: 'The food was delicious and the waiter...'
+}
+Openai::Client.embeddings.create(request_body)
+```
+
+[Request body documentation](https://platform.openai.com/docs/api-reference/embeddings/create)
 
 ## Contributing
 
