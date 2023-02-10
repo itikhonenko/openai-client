@@ -13,7 +13,7 @@ module Openai
       # @return [Hash] a hash with a completion
       def create(body)
         Http.new.post(PATH, body).body
-      rescue StandardError
+      rescue Faraday::Error
         nil
       end
     end

@@ -11,7 +11,7 @@ module Openai
       # @return [Hash] a hash with models
       def list
         Http.new.get(PATH).body
-      rescue StandardError
+      rescue Faraday::Error
         nil
       end
 
@@ -23,7 +23,7 @@ module Openai
       # @return [Hash] found model or nil
       def find(id)
         Http.new.get("#{PATH}/#{id}").body
-      rescue StandardError
+      rescue Faraday::Error
         nil
       end
     end
