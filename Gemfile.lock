@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    openai-client (0.4.0)
+    openai-client (0.4.1)
       faraday (~> 1.8)
       faraday_middleware (~> 1.2)
 
