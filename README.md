@@ -12,6 +12,7 @@ This gem is a wrapper for calling the OpenAI and GPT-3 APIs.
   * [Create an Image Edit](#create-an-image-edit)
   * [Create an Image Variation](#create-an-image-variation)
 * [OpenAI Embeddings API](#openai-embeddings-api)
+* [OpenAI Moderations API](#openai-moderations-api)
 
 ## Installation
 
@@ -151,6 +152,18 @@ Openai::Client.embeddings.create(request_body)
 ```
 
 [Request body documentation](https://platform.openai.com/docs/api-reference/embeddings/create)
+
+## OpenAI Moderations API
+
+```ruby
+request_body = {
+  model: 'text-moderation-latest', # text-moderation-stable or text-moderation-latest
+  input: 'I want to kill them.'
+}
+Openai::Client.moderations.create(request_body)
+```
+
+[Request body documentation](https://platform.openai.com/docs/api-reference/moderations/create)
 
 ## Contributing
 
