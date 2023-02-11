@@ -13,12 +13,13 @@ require 'openai/client/edits'
 require 'openai/client/completions'
 require 'openai/client/images'
 require 'openai/client/embeddings'
+require 'openai/client/moderations'
 
 module Openai
   module Client
     extend Configurable
 
-    ATTRS = ['models', 'edits', 'completions', 'images', 'embeddings'].freeze
+    ATTRS = ['models', 'edits', 'completions', 'images', 'embeddings', 'moderations'].freeze
 
     class << self
       ATTRS.each do |attr|
