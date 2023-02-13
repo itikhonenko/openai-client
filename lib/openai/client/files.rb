@@ -46,7 +46,7 @@ module Openai
       #
       # @param [String] id file ID
       #
-      # @return [Hash] found file or nil
+      # @return [Hash] found file
       def find(id)
         Http.new.get("#{PATH}/#{id}").body
       rescue Faraday::Error
@@ -58,7 +58,7 @@ module Openai
       #
       # @param [String] id file ID
       #
-      # @return [Hash] the contents of the specified file or nil
+      # @return [Hash] the contents of the specified file
       def find_content(id)
         Http.new.get("#{PATH}/#{id}/content").body
       rescue Faraday::Error
