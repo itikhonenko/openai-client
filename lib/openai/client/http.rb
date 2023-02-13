@@ -61,6 +61,20 @@ module Openai
         log_error(e) && raise
       end
 
+      # @api public
+      # Public: Makes a DELETE request using the Faraday HTTP Client.
+      #
+      # @param [String] path API path
+      #
+      # @raise [Faraday::Error] on failure API call
+      #
+      # @return [Faraday::Response] instance of Faraday::Response class
+      def delete(path)
+        connection.delete(path)
+      rescue Faraday::Error => e
+        log_error(e) && raise
+      end
+
       private
 
       attr_reader :connection, :logger

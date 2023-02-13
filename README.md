@@ -13,6 +13,12 @@ This gem is a wrapper for calling the OpenAI and GPT-3 APIs.
   * [Create an Image Variation](#create-an-image-variation)
 * [OpenAI Embeddings API](#openai-embeddings-api)
 * [OpenAI Moderations API](#openai-moderations-api)
+* [OpenAI Files API](#openai-files-api)
+  * [List Files](#list-files)
+  * [Find File](#find-file)
+  * [Find File Content](#find-file-content)
+  * [Upload File](#upload-file)
+  * [Delete File](#delete-file)
 
 ## Installation
 
@@ -75,7 +81,7 @@ request_body = {
 Openai::Client.completions.create(request_body)
 ```
 
-[Request body documentation](https://platform.openai.com/docs/api-reference/completions/create)
+[API documentation](https://platform.openai.com/docs/api-reference/completions/create)
 
 ## OpenAI Edits API
 
@@ -88,7 +94,7 @@ request_body = {
 Openai::Client.edits.create(request_body)
 ```
 
-[Request body documentation](https://platform.openai.com/docs/api-reference/edits/create)
+[API documentation](https://platform.openai.com/docs/api-reference/edits/create)
 
 ## OpenAI Image API
 
@@ -104,7 +110,7 @@ request_body = {
 response = Openai::Client.images.create(request_body)
 ```
 
-[Request body documentation](https://platform.openai.com/docs/api-reference/images/create)
+[API documentation](https://platform.openai.com/docs/api-reference/images/create)
 
 ### Create an Image Edit
 
@@ -123,7 +129,7 @@ response = Openai::Client.images.edit(request_body)
 - `image` - must be a valid PNG file, less than 4MB, and square. If mask is not provided, image must have transparency, which will be used as the mask.
 - `mask` - an additional image whose fully transparent areas (e.g. where alpha is zero) indicate where image should be edited. Must be a valid PNG file, less than 4MB, and have the same dimensions as image.
 
-[Request body documentation](https://platform.openai.com/docs/api-reference/images/create-edit)
+[API documentation](https://platform.openai.com/docs/api-reference/images/create-edit)
 
 ### Create an Image Variation
 
@@ -139,7 +145,7 @@ response = Openai::Client.images.variations(request_body)
 
 - `image` - must be a valid PNG file, less than 4MB, and square.
 
-[Request body documentation](https://platform.openai.com/docs/api-reference/images/create-variation)
+[API documentation](https://platform.openai.com/docs/api-reference/images/create-variation)
 
 ## OpenAI Embeddings API
 
@@ -151,7 +157,7 @@ request_body = {
 Openai::Client.embeddings.create(request_body)
 ```
 
-[Request body documentation](https://platform.openai.com/docs/api-reference/embeddings/create)
+[API documentation](https://platform.openai.com/docs/api-reference/embeddings/create)
 
 ## OpenAI Moderations API
 
@@ -163,7 +169,62 @@ request_body = {
 Openai::Client.moderations.create(request_body)
 ```
 
-[Request body documentation](https://platform.openai.com/docs/api-reference/moderations/create)
+[API documentation](https://platform.openai.com/docs/api-reference/moderations/create)
+
+## OpenAI Files API
+
+### List Files
+
+```ruby
+Openai::Client.files.list
+```
+
+[API documentation](https://platform.openai.com/docs/api-reference/files/list)
+
+### Find File
+
+```ruby
+Openai::Client.files.find(file_id)
+```
+
+[API documentation](https://platform.openai.com/docs/api-reference/files/retrieve)
+
+### Find File Content
+
+```ruby
+Openai::Client.files.find_content(file_id)
+```
+
+[API documentation](https://platform.openai.com/docs/api-reference/files/retrieve-content)
+
+### Upload File
+
+```ruby
+request_body = {
+  file: '/absolute/path/to/file.jsonl',
+  purpose: 'fine-tune'
+}
+Openai::Client.files.upload(request_body)
+```
+> The file format must be jsonl, where each line contains the prompt and completion properties.
+
+Example (file.jsonl):
+
+```json
+{"prompt": "<prompt text>", "completion": "<ideal generated text>"}
+{"prompt": "<prompt text>", "completion": "<ideal generated text>"}
+...
+```
+
+[API documentation](https://platform.openai.com/docs/api-reference/files/upload)
+
+### Delete File
+
+```ruby
+Openai::Client.files.delete(file_id)
+```
+
+[API documentation](https://platform.openai.com/docs/api-reference/files/delete)
 
 ## Contributing
 

@@ -15,10 +15,6 @@ RSpec.describe Openai::Client::Images do
     end
     let(:url) { "#{Openai::Client.configuration.openai_url}/#{described_class::CREATE_PATH}" }
 
-    before do
-      stub_request(:post, url).with({ body: request_body }).to_return(body: '{}', status: status)
-    end
-
     it_behaves_like 'API wrapper'
   end
 
@@ -37,10 +33,6 @@ RSpec.describe Openai::Client::Images do
     end
     let(:url) { "#{Openai::Client.configuration.openai_url}/#{described_class::EDIT_PATH}" }
 
-    before do
-      stub_request(:post, url).to_return(body: '{}', status: status)
-    end
-
     it_behaves_like 'API wrapper'
   end
 
@@ -56,10 +48,6 @@ RSpec.describe Openai::Client::Images do
       }
     end
     let(:url) { "#{Openai::Client.configuration.openai_url}/#{described_class::VARIATION_PATH}" }
-
-    before do
-      stub_request(:post, url).to_return(body: '{}', status: status)
-    end
 
     it_behaves_like 'API wrapper'
   end

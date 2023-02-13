@@ -29,4 +29,10 @@ RSpec.describe Openai::Client::Http do
       expect(request.env.request_headers['Content-Type']).to eq('multipart/form-data')
     end
   end
+
+  describe '#delete' do
+    subject(:request) { client.delete(url) }
+
+    include_examples 'API call'
+  end
 end
