@@ -19,6 +19,13 @@ This gem is a wrapper for calling the OpenAI and GPT-3 APIs.
   * [Find File Content](#find-file-content)
   * [Upload File](#upload-file)
   * [Delete File](#delete-file)
+* [OpenAI Fine-Tunes API](#openai-fine-tunes-api)
+  * [Create Fine-Tune](#create-fine-tune)
+  * [List Fine-Tunes](#list-fine-tunes)
+  * [Find Fine-Tune](#find-fine-tune)
+  * [List Fine-Tune Events](#list-fine-tune-events)
+  * [Cancel Fine-Tune](#cancel-fine-tune)
+  * [Delete Fine-Tune Model](#delete-fine-tune-model)
 
 ## Installation
 
@@ -81,7 +88,7 @@ request_body = {
 Openai::Client.completions.create(request_body)
 ```
 
-[API documentation](https://platform.openai.com/docs/api-reference/completions/create)
+[API Documentation](https://platform.openai.com/docs/api-reference/completions/create)
 
 ## OpenAI Edits API
 
@@ -94,7 +101,7 @@ request_body = {
 Openai::Client.edits.create(request_body)
 ```
 
-[API documentation](https://platform.openai.com/docs/api-reference/edits/create)
+[API Documentation](https://platform.openai.com/docs/api-reference/edits/create)
 
 ## OpenAI Image API
 
@@ -110,7 +117,7 @@ request_body = {
 response = Openai::Client.images.create(request_body)
 ```
 
-[API documentation](https://platform.openai.com/docs/api-reference/images/create)
+[API Documentation](https://platform.openai.com/docs/api-reference/images/create)
 
 ### Create an Image Edit
 
@@ -129,7 +136,7 @@ response = Openai::Client.images.edit(request_body)
 - `image` - must be a valid PNG file, less than 4MB, and square. If mask is not provided, image must have transparency, which will be used as the mask.
 - `mask` - an additional image whose fully transparent areas (e.g. where alpha is zero) indicate where image should be edited. Must be a valid PNG file, less than 4MB, and have the same dimensions as image.
 
-[API documentation](https://platform.openai.com/docs/api-reference/images/create-edit)
+[API Documentation](https://platform.openai.com/docs/api-reference/images/create-edit)
 
 ### Create an Image Variation
 
@@ -145,7 +152,7 @@ response = Openai::Client.images.variations(request_body)
 
 - `image` - must be a valid PNG file, less than 4MB, and square.
 
-[API documentation](https://platform.openai.com/docs/api-reference/images/create-variation)
+[API Documentation](https://platform.openai.com/docs/api-reference/images/create-variation)
 
 ## OpenAI Embeddings API
 
@@ -157,7 +164,7 @@ request_body = {
 Openai::Client.embeddings.create(request_body)
 ```
 
-[API documentation](https://platform.openai.com/docs/api-reference/embeddings/create)
+[API Documentation](https://platform.openai.com/docs/api-reference/embeddings/create)
 
 ## OpenAI Moderations API
 
@@ -169,7 +176,7 @@ request_body = {
 Openai::Client.moderations.create(request_body)
 ```
 
-[API documentation](https://platform.openai.com/docs/api-reference/moderations/create)
+[API Documentation](https://platform.openai.com/docs/api-reference/moderations/create)
 
 ## OpenAI Files API
 
@@ -179,7 +186,7 @@ Openai::Client.moderations.create(request_body)
 Openai::Client.files.list
 ```
 
-[API documentation](https://platform.openai.com/docs/api-reference/files/list)
+[API Documentation](https://platform.openai.com/docs/api-reference/files/list)
 
 ### Find File
 
@@ -187,7 +194,7 @@ Openai::Client.files.list
 Openai::Client.files.find(file_id)
 ```
 
-[API documentation](https://platform.openai.com/docs/api-reference/files/retrieve)
+[API Documentation](https://platform.openai.com/docs/api-reference/files/retrieve)
 
 ### Find File Content
 
@@ -195,7 +202,7 @@ Openai::Client.files.find(file_id)
 Openai::Client.files.find_content(file_id)
 ```
 
-[API documentation](https://platform.openai.com/docs/api-reference/files/retrieve-content)
+[API Documentation](https://platform.openai.com/docs/api-reference/files/retrieve-content)
 
 ### Upload File
 
@@ -216,7 +223,7 @@ Example (file.jsonl):
 ...
 ```
 
-[API documentation](https://platform.openai.com/docs/api-reference/files/upload)
+[API Documentation](https://platform.openai.com/docs/api-reference/files/upload)
 
 ### Delete File
 
@@ -224,7 +231,64 @@ Example (file.jsonl):
 Openai::Client.files.delete(file_id)
 ```
 
-[API documentation](https://platform.openai.com/docs/api-reference/files/delete)
+[API Documentation](https://platform.openai.com/docs/api-reference/files/delete)
+
+## OpenAI Fine-Tunes API
+
+### Create Fine-Tune
+
+```ruby
+request_body = {
+  training_file: "file-XGinujblHPwGLSztz8cPS8XY"
+}
+
+Openai::Client.fine_tunes.create(request_body)
+```
+
+[API Documentation](https://platform.openai.com/docs/api-reference/fine-tunes/create)
+
+### List Fine-Tunes
+
+```ruby
+Openai::Client.fine_tunes.list
+```
+
+[API Documentation](https://platform.openai.com/docs/api-reference/fine-tunes/list)
+
+### Find Fine-Tune
+
+```ruby
+Openai::Client.fine_tunes.find(fine_tune_id)
+```
+
+[API Documentation](https://platform.openai.com/docs/api-reference/fine-tunes/retrieve)
+
+### List Fine-Tune Events
+
+```ruby
+Openai::Client.fine_tunes.find_events(fine_tune_id)
+```
+
+[API Documentation](https://platform.openai.com/docs/api-reference/fine-tunes/events)
+
+### Cancel Fine-Tune
+
+```ruby
+Openai::Client.fine_tunes.cancel(fine_tune_id)
+```
+
+[API Documentation](https://platform.openai.com/docs/api-reference/fine-tunes/cancel)
+
+### Delete Fine-Tune Model
+
+```ruby
+Openai::Client.models.delete(model_id)
+```
+
+[API Documentation](https://platform.openai.com/docs/api-reference/fine-tunes/delete-model)
+
+> - You must have the Owner role in your organization.
+> - Make sure you provide the Model ID and not the Fine-Tune ID.
 
 ## Contributing
 

@@ -20,9 +20,21 @@ module Openai
       #
       # @param [String] id model id
       #
-      # @return [Hash] found model or nil
+      # @return [Hash] found model
       def find(id)
         Http.new.get("#{PATH}/#{id}").body
+      rescue Faraday::Error
+        nil
+      end
+
+      # @api public
+      # Public: Makes an API call to delete a model.
+      #
+      # @param [String] id model id
+      #
+      # @return [Hash] the model
+      def delete(id)
+        Http.new.delete("#{PATH}/#{id}").body
       rescue Faraday::Error
         nil
       end

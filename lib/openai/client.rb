@@ -15,18 +15,28 @@ require 'openai/client/images'
 require 'openai/client/embeddings'
 require 'openai/client/moderations'
 require 'openai/client/files'
+require 'openai/client/fine_tunes'
 
 module Openai
   module Client
     extend Configurable
 
-    ATTRS = ['models', 'edits', 'completions', 'images', 'embeddings', 'moderations', 'files'].freeze
+    ATTRS = [
+      'models',
+      'edits',
+      'completions',
+      'images',
+      'embeddings',
+      'moderations',
+      'files',
+      'fine_tunes'
+    ].freeze
 
     class << self
       ATTRS.each do |attr|
         define_method(attr) do
-          instance_variable_get("@#{attr}") || instance_variable_set("@#{attr}",
-                                                                     const_get(attr.capitalize, self).new)
+          klass = const_get(attr.split('_').map(&:capitalize).join, self)
+          instance_variable_get("@#{attr}") || instance_variable_set("@#{attr}", klass.new)
         end
       end
     end

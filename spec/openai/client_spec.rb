@@ -39,12 +39,14 @@ RSpec.describe Openai::Client do
     end
   end
 
-  ['models', 'edits', 'completions', 'images', 'embeddings', 'moderations', 'files'].each do |attr|
+  ['models', 'edits', 'completions', 'images', 'embeddings', 'moderations', 'files', 'fine_tunes'].each do |attr|
+    api_class = attr.split('_').map(&:capitalize).join
+
     describe ".#{attr}" do
       subject(:method) { described_class.public_send(attr) }
 
-      it "returns an instance of the #{attr.capitalize} class" do
-        expect(method).to be_instance_of(described_class.const_get(attr.capitalize))
+      it "returns an instance of the #{api_class} class" do
+        expect(method).to be_instance_of(described_class.const_get(api_class))
       end
     end
   end
