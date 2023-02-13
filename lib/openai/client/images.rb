@@ -1,5 +1,7 @@
 # frozen_string_literal: true
 
+require 'openai/client/utils'
+
 module Openai
   module Client
     class Images
@@ -26,7 +28,7 @@ module Openai
       #
       # @return [Hash] an edited or extended image
       def edit(body)
-        Http.new.multipart_post(EDIT_PATH, upload_io(body, %i[image mask])).body
+        Http.new.multipart_post(EDIT_PATH, Utils.upload_io(body, %i[image mask], 'png')).body
       rescue Faraday::Error
         nil
       end
@@ -38,25 +40,9 @@ module Openai
       #
       # @return [Hash] a variation of a given image
       def variations(body)
-        Http.new.multipart_post(VARIATION_PATH, upload_io(body, %i[image])).body
+        Http.new.multipart_post(VARIATION_PATH, Utils.upload_io(body, %i[image], 'png')).body
       rescue Faraday::Error
         nil
-      end
-
-      private
-
-      # @api private
-      # Internal: Creates the open IO object for the uploaded file.
-      #
-      # @param [Hash] data request body
-      # @param [Array] param_names parameter names
-      #
-      # @return [Hash] request body
-      def upload_io(data, param_names)
-        param_names.each do |param|
-          data[param] = Faraday::FilePart.new(data[param], 'rb') if data[param]
-        end
-        data
       end
     end
   end
