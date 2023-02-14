@@ -5,14 +5,20 @@ This gem is a wrapper for calling the OpenAI and GPT-3 APIs.
 * [Installation](#installation)
 * [Usage](#usage)
 * [OpenAI Models API](#openai-models-api)
+  * [List Models](#list-models)
+  * [Find Model](#find-model)
 * [OpenAI Completions API](#openai-completions-api)
+  * [Create Completion](#create-completion)
 * [OpenAI Edits API](#openai-edits-api)
+  * [Create Edit](#create-edit)
 * [OpenAI Image API](#openai-image-api)
   * [Create an Image](#create-an-image)
   * [Create an Image Edit](#create-an-image-edit)
   * [Create an Image Variation](#create-an-image-variation)
 * [OpenAI Embeddings API](#openai-embeddings-api)
+  * [Create Embeddings](#create-embeddings)
 * [OpenAI Moderations API](#openai-moderations-api)
+  * [Create Moderation](#create-moderation)
 * [OpenAI Files API](#openai-files-api)
   * [List Files](#list-files)
   * [Find File](#find-file)
@@ -63,6 +69,18 @@ end
 
 ## OpenAI Models API
 
+### List Models
+
+```ruby
+Openai::Client.models.list
+```
+
+### Find Model
+
+```ruby
+Openai::Client.models.find(model_id)
+```
+
 ```ruby
 # Models
 Openai::Client.models.list
@@ -72,6 +90,8 @@ Openai::Client.models.find(model_id)
 ```
 
 ## OpenAI Completions API
+
+### Create Completion
 
 ```ruby
 request_body = {
@@ -91,6 +111,8 @@ Openai::Client.completions.create(request_body)
 [API Documentation](https://platform.openai.com/docs/api-reference/completions/create)
 
 ## OpenAI Edits API
+
+### Create Edit
 
 ```ruby
 request_body = {
@@ -156,6 +178,8 @@ response = Openai::Client.images.variations(request_body)
 
 ## OpenAI Embeddings API
 
+### Create Embeddings
+
 ```ruby
 request_body = {
   model: 'text-embedding-ada-002',
@@ -167,6 +191,8 @@ Openai::Client.embeddings.create(request_body)
 [API Documentation](https://platform.openai.com/docs/api-reference/embeddings/create)
 
 ## OpenAI Moderations API
+
+### Create Moderation
 
 ```ruby
 request_body = {
